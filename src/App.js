@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import SearchAppBar from './components/SearchAppBar.js';
+import JobCard from './components/JobCard.js';
+import jobs from './data/jobs.json';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <SearchAppBar/>
+      {jobs.slice(0,4).map((job) => (
+        <JobCard id={job.id}
+        title={job.title}
+        description={job.description}
+        skills={job.skills}/>
+      ))}
+      
     </div>
+
   );
 }
 
