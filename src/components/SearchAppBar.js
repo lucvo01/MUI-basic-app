@@ -11,6 +11,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import AuthContext from '../auth/AuthContext';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,6 +57,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const navigate = useNavigate();
+  const auth = React.useContext(AuthContext);
+
+  const handleClickLogin = () => {
+    navigate("/Login")
+  }
+
+  const handleClickLogout = () => {
+    auth.signout(() => {
+      navigate("/");
+    });
+  };
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -85,7 +100,14 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <LoginIcon/>
+          {auth?.user ? (
+          <Button onClick={handleClickLogout} startIcon={<LogoutIcon/>} variant="contained">
+            Logout
+          </Button>) : (<Button onClick={handleClickLogin} startIcon={<LoginIcon/>} variant="contained">
+            Login
+          </Button>)}
+          
+
         </Toolbar>
       </AppBar>
     </Box>

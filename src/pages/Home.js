@@ -20,7 +20,7 @@ function Home() {
 
   return (
     <div>
-        <SearchAppBar/>
+      <SearchAppBar/>
       <Grid container spacing={3} >
           {jobs?.map((job) => (
             <Grid item xs={12} sm={12} md={6} lg={4} key={job.id}>
