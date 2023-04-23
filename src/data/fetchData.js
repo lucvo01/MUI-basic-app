@@ -1,10 +1,29 @@
 import jobs from "./jobs.json";
 
-function getJobs(page) {
-    const startIndex = (page - 1) * 5;
-    const endIndex = startIndex + 5;
-    const pageTotal = Math.ceil(jobs.length/5);
-  return {jobs: jobs.slice(startIndex, endIndex), pageTotal};
+async function getJobs(page, q = null) {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 100);
+  });
+
+  await promise;
+  const startIndex = (page - 1) * 5;
+  const endIndex = startIndex + 5;
+  const pageTotal = Math.ceil(jobs.length / 5);
+  return { jobs: jobs.slice(startIndex, endIndex), pageTotal };
 }
 
-export default getJobs;
+async function getJob(id) {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 100);
+  });
+  await promise;
+
+  return jobs.find((job) => job.id == id);
+}
+const api = { getJobs, getJob };
+
+export default api;

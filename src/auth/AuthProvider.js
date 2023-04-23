@@ -24,7 +24,7 @@ function AuthProvider({children}) {
         })
     };
     
-    let signout = (newUser, callback) => {
+    let signout = (callback) => {
         return Auth.signout(() => {
             setUser(null);
             callback();
