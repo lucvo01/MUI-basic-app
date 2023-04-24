@@ -40,7 +40,7 @@ export default function JobCard({ description, skills, id, title }) {
         height="100%"
         padding="5px"
       >
-        <Card sx={{ minWidth: 275 }} id={id}>
+        <Card sx={{ minWidth: 275 }} id={id} key={id}>
           <CardContent>
             <Typography
               sx={{ fontSize: 14 }}
@@ -52,7 +52,7 @@ export default function JobCard({ description, skills, id, title }) {
             <Divider />
             <Typography variant="h5" component="div">
               {skills.map((skill) => (
-                <Chip label={skill} variant="outlined" />
+                <Chip label={skill} variant="outlined"/>
               ))}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">

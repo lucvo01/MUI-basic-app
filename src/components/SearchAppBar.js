@@ -56,17 +56,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const q = searchParams.get("q");
+  const q = searchParams.get("q")  || "";
 
-  // const handleSubmit = (event) => {
-  //   const formData = new FormData(event.currentTarget);
-  //   let q = formData.get("q");
-  //   setSearchParams({ q: q });
-  // };
+  const handleSubmit = (event) => {
+    const formData = new FormData(event.currentTarget);
+    console.log(formData);
+    let q = formData.get("q");
+    setSearchParams({ q: q });
+  };
 
-  const handleSearch = (event) => {
-    setSearchParams({q: event.target.value})
-  }
+  // const handleSearch = (event) => {
+  //   setSearchParams({q: event.target.value})
+  // }
 
   const navigate = useNavigate();
   const auth = React.useContext(AuthContext);
@@ -91,7 +92,7 @@ export default function SearchAppBar() {
           >
             JOB ROUTING
           </Typography>
-          <Box sx={{ ml: 2 }} component="form" >
+          <Box sx={{ ml: 2 }} component="form" onSubmit={handleSubmit}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -99,8 +100,9 @@ export default function SearchAppBar() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
-                value={q}
-                onChange={handleSearch}
+                defaultValue={q ?? undefined}
+                name="q"
+                // onChange={handleSearch}
               />
             </Search>
           </Box>
