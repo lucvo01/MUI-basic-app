@@ -6,12 +6,24 @@ async function getJobs(page, q = null) {
       resolve();
     }, 100);
   });
-
   await promise;
   const startIndex = (page - 1) * 5;
   const endIndex = startIndex + 5;
   const pageTotal = Math.ceil(jobs.length / 5);
-  return { jobs: jobs.slice(startIndex, endIndex), pageTotal };
+
+  if(q) {
+    let filteredJobs = jobs.filter(
+      (job) =>
+        job.title.includes(q) ||
+        job.description.includes(q) ||
+        job.city.includes(q) ||
+        job.skills.some((skill) => skill.includes(q))
+    );
+    return { jobs: filteredJobs, pagesTotal: 1 };
+  } else {
+    return { jobs: jobs.slice(startIndex, endIndex), pageTotal };
+  }
+
 }
 
 async function getJob(id) {

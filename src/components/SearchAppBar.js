@@ -9,7 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation, useSearchParams } from "react-router-dom";
 import AuthContext from "../auth/AuthContext";
 
 const Search = styled("div")(({ theme }) => ({
@@ -55,6 +55,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q") || "";
+  const handleSearchChange = (event) => {
+    setSearchParams({ q: event.target.value });
+  };
+
   const navigate = useNavigate();
   const auth = React.useContext(AuthContext);
   const location = useLocation();
@@ -89,6 +95,8 @@ export default function SearchAppBar() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
             </Search>
           </Box>
