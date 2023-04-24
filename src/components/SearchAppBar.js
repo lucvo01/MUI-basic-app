@@ -56,17 +56,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get("q") || "";
-  const handleSearchChange = (event) => {
-    setSearchParams({ q: event.target.value });
-  };
+  const q = searchParams.get("q");
+
+  // const handleSubmit = (event) => {
+  //   const formData = new FormData(event.currentTarget);
+  //   let q = formData.get("q");
+  //   setSearchParams({ q: q });
+  // };
+
+  const handleSearch = (event) => {
+    setSearchParams({q: event.target.value})
+  }
 
   const navigate = useNavigate();
   const auth = React.useContext(AuthContext);
-  const location = useLocation();
-  // const handleClickLogin = () => {
-  //   navigate("/Login");
-  // };
+  // const location = useLocation();
 
   const handleClickLogout = () => {
     auth.signout(() => {
@@ -87,7 +91,7 @@ export default function SearchAppBar() {
           >
             JOB ROUTING
           </Typography>
-          <Box sx={{ ml: 2 }}>
+          <Box sx={{ ml: 2 }} component="form" >
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -95,8 +99,8 @@ export default function SearchAppBar() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
-                value={searchQuery}
-                onChange={handleSearchChange}
+                value={q}
+                onChange={handleSearch}
               />
             </Search>
           </Box>
@@ -120,7 +124,6 @@ export default function SearchAppBar() {
               </>
             ) : (
               <Button
-                // onClick={handleClickLogin}
                 component={Link}
                 to="/Login"
                 // state={{ backgroundLocation: location }}

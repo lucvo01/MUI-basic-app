@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import * as React from "react";
+import { useState, useEffect } from "react";
 import SearchAppBar from "../components/SearchAppBar.js";
 import JobCard from "../components/JobCard.js";
 // import jobs from './data/jobs.json';
@@ -6,20 +7,24 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import api from "../data/fetchData.js";
 import Grid from "@mui/material/Grid";
+import {useSearchParams} from "react-router-dom";
 
 function Home() {
   const [jobs, setJobs] = useState([]);
   const [page, setPage] = useState(1);
   const [pageTotal, setPageTotal] = useState(0);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const q = searchParams.get("q");
+
   useEffect(() => {
     const fetch = async () => {
-      const data = await api.getJobs(page);
+      const data = await api.getJobs(page, q);
       setJobs(data.jobs);
       setPageTotal(data.pageTotal);
     };
     fetch();
-  }, [page]);
+  }, [page, q]);
 
   return (
     <div>

@@ -14,7 +14,7 @@ async function getJobs(page, q = null) {
   if(q) {
     let filteredJobs = jobs.filter(
       (job) =>
-        job.title.includes(q) ||
+        job.title.toLowerCase().includes(q) ||
         job.description.includes(q) ||
         job.city.includes(q) ||
         job.skills.some((skill) => skill.includes(q))
