@@ -21,7 +21,7 @@ function Login() {
   const location = useLocation();
   console.log("login location", location);
   let from = location.state?.backgroundLocation
-    ? location.pathname.backgroundLocation
+    ? location.state.backgroundLocation
     : "/";
 
   const handleClose = () => {
@@ -38,7 +38,7 @@ function Login() {
         <Box sx={style}>
           <LoginForm
             callback={() => {
-              navigate(from);
+              navigate(location.pathname, {state: {backgroundLocation: from }});
             }}
           />
         </Box>

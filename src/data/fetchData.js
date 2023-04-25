@@ -34,7 +34,7 @@ async function getJob(id) {
   });
   await promise;
 
-  return jobs.find((job) => job.id == id);
+  return jobs.find((job) => job.id === id);
 }
 const api = { getJobs, getJob };
 

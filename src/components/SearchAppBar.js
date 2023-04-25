@@ -9,7 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
-import { useNavigate, Link, useLocation, useSearchParams } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import AuthContext from "../auth/AuthContext";
 
 const Search = styled("div")(({ theme }) => ({
@@ -80,14 +80,17 @@ export default function SearchAppBar() {
   };
 
   return (
-    <Box>
+    <Box sx={{marginBottom: "2rem"}}>
       <AppBar position="static">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "none", sm: "block" }, 
+                  "&:hover": {cursor: "pointer"},
+                  marginLeft: "2rem"
+                }}
             onClick={() => navigate("/")}
           >
             JOB ROUTING
@@ -119,7 +122,7 @@ export default function SearchAppBar() {
                   onClick={handleClickLogout}
                   startIcon={<LogoutIcon />}
                   variant="contained"
-                  sx={{ marginLeft: "15px" }}
+                  sx={{ marginLeft: "2rem" }}
                 >
                   Logout
                 </Button>
@@ -131,6 +134,7 @@ export default function SearchAppBar() {
                 // state={{ backgroundLocation: location }}
                 startIcon={<LoginIcon />}
                 variant="contained"
+                sx={{ marginRight: "2rem" }}
               >
                 Login
               </Button>

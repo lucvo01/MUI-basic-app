@@ -40,7 +40,7 @@ export default function JobCard({ description, skills, id, title }) {
         height="100%"
         padding="5px"
       >
-        <Card sx={{ minWidth: 275 }} id={id} key={id}>
+        <Card sx={{ minWidth: 275, height: "100%" }} id={id} key={id}>
           <CardContent>
             <Typography
               sx={{ fontSize: 14 }}
@@ -58,8 +58,8 @@ export default function JobCard({ description, skills, id, title }) {
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {description}
             </Typography>
-          </CardContent>
-          <CardActions>
+          </CardContent>   
+          <CardActions sx={{display: "flex", direction: "row", justifyContent:"center"}}>
             <Button
               variant="contained"
               size="small"
@@ -67,6 +67,7 @@ export default function JobCard({ description, skills, id, title }) {
               to={`/JobDetail/${id}`}
               state={{ backgroundLocation: location }}
               onClick={() => console.log("Learn more", location)}
+              sx={{ width: "130px"}}
             >
               Learn More
             </Button>

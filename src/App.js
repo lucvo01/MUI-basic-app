@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 function App() {
   const auth = useContext(AuthContext);
   const location = useLocation();
-  // const state = location.state;
+  const state = location.state;
 
   return (
     <>
@@ -27,7 +27,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
         </Route>
       </Routes>
-      {auth.user ? (
+      {state && auth.user ? (
         <Routes>
           <Route path="/JobDetail/:id" element={<JobDetail />} />
         </Routes>
@@ -35,7 +35,7 @@ function App() {
         <Routes>
           <Route
             path="/JobDetail/:id"
-            element={<Login location={location} />}
+            element={<Login />}
           />
         </Routes>
       )}
