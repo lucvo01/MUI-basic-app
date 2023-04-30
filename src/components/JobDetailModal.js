@@ -10,7 +10,7 @@ import Divider from "@mui/material/Divider";
 import Modal from "@mui/material/Modal";
 // import Paper from "@mui/material/Paper";
 import api from "../data/fetchData";
-import { useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const style = {
   bgcolor: "background.paper",
@@ -43,7 +43,7 @@ function JobDetailModal() {
   }, [id]);
 
   const handleClose = () => {
-    navigate(-1);
+    navigate("/");
     // navigate(location?.state?.backgroundLocation || "/");
   };
 
